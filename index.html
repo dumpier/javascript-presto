@@ -35,7 +35,23 @@
 		  }
 	  }
   };
-  
+
+$(function(){
+	$("body").on("click", "a.presto-get", function(event){
+		event.preventDefault();
+		console.log(`<${$(this).text()}> is clicked ! `);
+		let url = $(this).attr("href");
+		let target = $(this).attr("p-target");
+		let parameter = $(this).attr("p-param");
+		if(! $(this).attr("href")) {
+			console.log(`no action to do !`);
+			return false;
+		}
+
+		if(target){ return presto.load(target, url, parameter);
+		}else{ return presto.load("#game-content-panel", url, parameter); }
+	});
+});
 </script>
 	<a class="btn btn-sm btn-info presto-get" href="/" p-target="#content">Load</a>
 	<div id="content"></div>
