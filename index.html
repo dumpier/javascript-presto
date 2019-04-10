@@ -14,6 +14,8 @@
 <body>
 <script>
   var presto = presto || {
+	loading_gif : "https://www.machioka.co.jp/images/img-loading.gif",
+	  
     load : function(target, url, params) {
       console.log(`load content. url:${url}, target:${target}`);
       this.loading(target);
@@ -31,7 +33,7 @@
     
     loading : function (target) {
 		  if(! $(`${target} div.presto-loading`).length ){
-			  $(target).prepend("<div class='presto-loading' style='text-align:center; width:100%; height:90%;'><img src='/res/icons/loading.colorful.gif'></div>");
+			  $(target).prepend(`<div class='presto-loading' style='text-align:center; width:100%; height:90%;'><img src='${loading_gif}'></div>`);
 		  }
 	  }
   };
