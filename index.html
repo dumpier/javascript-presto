@@ -33,7 +33,7 @@
     
     loading : function (target) {
 		  if(! $(`${target} div.presto-loading`).length ){
-			  $(target).prepend(`<div class='presto-loading' style='text-align:center; width:100%; height:90%;'><img src='${loading_gif}'></div>`);
+			  $(target).prepend(`<div class='presto-loading' style='text-align:center; width:100%; height:90%;'><img src='${this.loading_gif}'></div>`);
 		  }
 	  }
   };
