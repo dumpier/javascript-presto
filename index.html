@@ -13,50 +13,46 @@
 	</head>
 <body>
 <script>
-  var presto = presto || {
-	loading_gif : "https://www.machioka.co.jp/images/img-loading.gif",
-	  
-    load : function(target, url, params) {
-      console.log(`load content. url:${url}, target:${target}`);
-      this.loading(target);
-      
-      $.ajax({ type: "GET", url: url, data: params, timeout: 3000 }).done(function(data){
-			  console.log(data);
-			  $(target).html(data);
-		  }).fail(function(data){
-			  console.log('error',data);
-			  $(target).html(data);
-		  }).always(function(data){
-			  console.log('always...');
-		  });
+	var presto = presto || {
+		loading_gif : "https://www.machioka.co.jp/images/img-loading.gif",
+
+	    load : function(target, url, params) {
+    		console.log(`load content. url:${url}, target:${target}`);
+			this.loading(target);
+
+    		$.ajax({ type: "GET", url: url, data: params, timeout: 3000 }).done(function(data){
+				$(target).html(data);
+			}).fail(function(data){
+				$(target).html(data);
+			}).always(function(data){ console.log('always...'); });
     },
-    
+
     loading : function (target) {
-		  if(! $(`${target} div.presto-loading`).length ){
-			  $(target).prepend(`<div class='presto-loading' style='text-align:center; width:100%; height:90%;'><img src='${this.loading_gif}'></div>`);
-		  }
-	  }
-  };
-
-$(function(){
-	$("body").on("click", "a.presto-get", function(event){
-		event.preventDefault();
-		console.log(`<${$(this).text()}> is clicked ! `);
-		let url = $(this).attr("href");
-		let target = $(this).attr("p-target");
-		let parameter = $(this).attr("p-param");
-		if(! $(this).attr("href")) {
-			console.log(`no action to do !`);
-			return false;
+		if(! $(`${target} div.presto-loading`).length ){
+			$(target).prepend(`<div class='presto-loading' style='text-align:center; width:100%; height:90%;'><img src='${this.loading_gif}'></div>`);
 		}
+	}
+	};
 
-		if(target){ return presto.load(target, url, parameter);
-		}else{ return presto.load("#game-content-panel", url, parameter); }
+	$(function(){
+		$("body").on("click", "a.presto-get", function(event){
+			event.preventDefault();
+			console.log(`<${$(this).text()}> is clicked ! `);
+			let url = $(this).attr("href");
+			let target = $(this).attr("p-target");
+			let parameter = $(this).attr("p-param");
+			if(! $(this).attr("href")) {
+				console.log(`no action to do !`);
+				return false;
+			}
+
+			if(target){ return presto.load(target, url, parameter);
+			}else{ return presto.load("#game-content-panel", url, parameter); }
+		});
 	});
-});
 </script>
 	<a class="btn btn-sm btn-info presto-get" href="/javascript-presto/" p-target="#content">Load</a>
-	<div id="content"></div>
+	<div id="content" style="padding:10px;"></div>
 	
 	
   
