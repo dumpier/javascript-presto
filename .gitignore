@@ -10,3 +10,4 @@ Thumbs.db
 /.settings/
 /.vscode
 .phpunit.result.cache
+.project

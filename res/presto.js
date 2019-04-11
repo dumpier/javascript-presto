@@ -1,10 +1,12 @@
+/**
+ * javascript
+*/
 var presto = presto || {
+	mask_html : "<div class='presto-loading'><img src='https://loading.io/spinners/rolling/lg.curve-bars-loading-indicator.gif'></div>",
 
-	loading_html : "<div class='presto-loading'><img src='https://loading.io/spinners/rolling/lg.curve-bars-loading-indicator.gif'></div>",
-
-	loading : function(target) {
+	mask : function(target) {
 		if(! $(`${target} div.presto-loading`).length ){
-			$(target).prepend(this.loading_html);
+			$(target).prepend(this.mask_html);
 		}
 	},
 
@@ -18,13 +20,13 @@ var presto = presto || {
 		let params = presto.param.all(el);
 
 		console.log(`load content. url:${url}, target:${target}, params:${params}`);
-		this.loading(target);
+		this.mask(target);
 
 		$.ajax({ type: "GET", url: url, data: params, timeout: 3000 }).done(function(data){
 			console.log(data);
 			$(target).html(data);
-		}).fail(function(data){
-			console.log('error',data);
+		}).fail(function(xhr, status, error){
+			console.log(`${status},${xhr},${error}`);
 			$(target).html(data);
 		}).always(function(){
 			console.log('always...');
