@@ -13,7 +13,7 @@ var presto = presto || {
 
 	load : function(el) {
 		let url = el.attr("href");
-		let target = el.attr("p-target");
+		let target = el.attr("p-target") ? el.attr("p-target") : "#game-content-panel";
 		let params = presto.param.all(el);
 
 		this.loading(target);
@@ -107,11 +107,12 @@ presto.table.html = {
 // ディレクティブ
 // ----------------------------------------
 presto.directive = {}
+presto.directive.on = {}
+presto.directive.bind = {}
+presto.directive.model = {}
 presto.directive.if = {}
 presto.directive.elseif = {}
 presto.directive.else = {}
 presto.directive.endif = {}
 presto.directive.for = {}
 presto.directive.forearch = {}
-presto.directive.bind = {}
-presto.directive.model = {}
