@@ -1,12 +1,9 @@
-/**
- * javascript
-*/
 var presto = presto || {
-	mask_html : "<div class='presto-loading'><img src='https://loading.io/spinners/rolling/lg.curve-bars-loading-indicator.gif'></div>",
+	lodder : `<div class='presto-loading'><div class="loader"></div></div>`,
 
-	mask : function(target) {
+	loading : function(target) {
 		if(! $(`${target} div.presto-loading`).length ){
-			$(target).prepend(this.mask_html);
+			$(target).prepend(this.lodder);
 		}
 	},
 
@@ -19,22 +16,30 @@ var presto = presto || {
 		let target = el.attr("p-target");
 		let params = presto.param.all(el);
 
+		this.loading(target);
 		console.log(`load content. url:${url}, target:${target}, params:${params}`);
-		this.mask(target);
 
 		$.ajax({ type: "GET", url: url, data: params, timeout: 3000 }).done(function(data){
-			console.log(data);
 			$(target).html(data);
 		}).fail(function(xhr, status, error){
-			console.log(`${status},${xhr},${error}`);
-			$(target).html(data);
+			$(target).html(`Error!${status},${xhr},${error}`);
 		}).always(function(){
 			console.log('always...');
 		});
 	}
 };
 
+presto.param = {
+	all : function (el) { return Object.assign( this.form(el), this.param(el), this.ref(el) ); },
+	form : function (el) { return $(el).serializeArray(); },
+	param : function (el) { return $(el).attr("p-param"); } ,
+	ref : function (el) { return $(el).attr("p-ref"); },
+}
 
+
+// ----------------------------------------
+// tableの生成
+// ----------------------------------------
 presto.table = {
 	prop : {
 		height : 0, rows : [], header : [], fields : [], target : "",
@@ -55,20 +60,20 @@ presto.table = {
 
 	render : function(is_not_reset=false) {
 		let html = `<table class="${presto.table.prop.css}">${this.html.header()} ${this.html.body()}</table>`;
-
 		console.log(html);
 		$(this.prop.target).html(html);
-
-		if(! is_not_reset ) { this.reset(); }
-
+		// if(! is_not_reset ) { this.reset(); }
 		return this;
 	}
 }
 
 presto.table.html = {
+	// 1個上のnamespace
+	prop : presto.table.prop,
+
 	header : function () {
-		let header = (presto.table.prop.header.length) ? presto.table.prop.header : this.header_default();
-		console.log(header);
+		let header = (this.prop.header.length) ? this.prop.header : this.header_default();
+		console.log(`header: ${header}`);
 
 		let html = `<theader>`;
 		header.forEach(function(field){ html += `<th>${field}</th>`; });
@@ -78,13 +83,13 @@ presto.table.html = {
 
 	header_default : function() {
 		// 配列の場合、CSVだと判定
-		return Array.isArray(presto.table.prop.rows[0]) ? presto.table.prop.rows.shift() : Object.keys(presto.table.prop.rows[0]);
+		return Array.isArray(this.prop.rows[0]) ? this.prop.rows.shift() : Object.keys(this.prop.rows[0]);
 	},
 
 	body : function() {
-		if(! presto.table.prop.rows ) { return ""; }
+		if(! this.prop.rows ) { return ""; }
 		let html = "";
-		presto.table.prop.rows.forEach(function(row){ html += this.line(row); }, this);
+		this.prop.rows.forEach(function(row){ html += this.line(row); }, this);
 		return html;
 	},
 
@@ -95,11 +100,18 @@ presto.table.html = {
 		return html;
 	}
 }
+// ----------------------------------------
 
 
-presto.param = {
-	all : function (el) { return Object.assign(this.form(el), this.param(el), this.ref(el)); },
-	form : function (el) { return $(el).serializeArray(); },
-	param : function (el) { return $(el).attr("p-param"); } ,
-	ref : function (el) { return $(el).attr("p-ref"); },
-}
+// ----------------------------------------
+// ディレクティブ
+// ----------------------------------------
+presto.directive = {}
+presto.directive.if = {}
+presto.directive.elseif = {}
+presto.directive.else = {}
+presto.directive.endif = {}
+presto.directive.for = {}
+presto.directive.forearch = {}
+presto.directive.bind = {}
+presto.directive.model = {}

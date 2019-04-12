@@ -1,6 +1,8 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PHP-PRESTO</title>
 
@@ -12,7 +14,8 @@
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
-<script src="./res/presto.js"></script>
+<link href="./res/css/loader.css" rel="stylesheet" type="text/css">
+<script src="./res/js/presto.js"></script>
 
 <style>
 	* { font-size:9pt; }
@@ -33,7 +36,6 @@ $(function(){
 		{"id": 1, "name": "test", "caption" : "memo"},
 		{"id": 2, "name": "test", "caption" : "memo"},
 		{"id": 3, "name": "test", "caption" : "memo"},
-		{"id": 4, "name": "test", "caption" : "memo"},
 	];
 	presto.table.target("div#presto-json-panel").rows(rows).render();
 
@@ -42,8 +44,6 @@ $(function(){
 		[1, "name", "memo"],
 		[2, "name", "memo"],
 		[3, "name", "memo"],
-		[4, "name", "memo"],
-		[5, "name", "memo"],
 	];
 	presto.table.target("div#presto-csv-panel").rows(csv).render();
 });
@@ -54,22 +54,28 @@ $(function(){
 <body style="margin: 10px;">
 	<a href="./character.html" class="btn btn-sm btn-info presto-get" data-toggle='modal' data-target='#modal' p-target="#modal-body">Load Modal</a>
 	<a href="./character.html" class="btn btn-sm btn-success presto-get" data-toggle='modal' data-target='#modal' p-target="#modal-body">Load Modal</a>
+	<a href="./character.html" class="btn btn-sm btn-warning presto-get" data-toggle='modal' data-target='#modal' p-target="#modal-body">Load Modal</a>
 
-	<div id="presto-json-panel" style="padding-top:10px;"></div>
-	<div id="presto-csv-panel" style="padding-top:10px;"></div>
+	<div class="row">
 
-	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="ModalLongTitle">Modal title</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" id='modal-body'></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		<div class="col-md-8"><div id="presto-json-panel" style="margin-top:10px;"></div></div>
+		<div class="col-md-4"><div class="loader"></div></div>
+		<div class="col-md-8"><div id="presto-csv-panel" style="margin-top:10px;"></div></div>
+		<div class="col-md-4"><div class="loader"></div></div>
+
+		<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="ModalLongTitle">Modal title</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id='modal-body'></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
 				</div>
 			</div>
 		</div>
