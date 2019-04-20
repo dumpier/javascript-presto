@@ -12,12 +12,15 @@ canvas { width: 100%; height: 100% }
 
 
 <script>
-window.addEventListener('resize', function () {
+window.addEventListener('load', function(){
+  window.addEventListener('resize', function () {
     renderer.setSize(document.body.clientWidth, document.body.clientHeight);
+  });
 });
 
 
 var presto = presto || {}
+
 presto.random = {
   color : function(){
     let r = ('0' + Math.floor(Math.random() * 255).toString(16)).slice(-2);
@@ -37,16 +40,17 @@ presto.cube = {
   color : function(color){this.prop.color = color;},
   speed : function() {},
   create : function(i){
-      let cube = new THREE.Mesh( new THREE.BoxGeometry( 0.5, 0.5, 0.5 ), new THREE.MeshBasicMaterial( { color: presto.random.color() } ) );
-      cube.position.x = this.prop.position.x;
-      cube.position.y = this.prop.position.y;
-      cube.position.z = this.prop.position.z;
+    let cube = new THREE.Mesh( new THREE.BoxGeometry( 0.85, 0.85, 0.85 ), new THREE.MeshBasicMaterial( { color: presto.random.color() } ) );
+    cube.position.x = this.prop.position.x;
+    cube.position.y = this.prop.position.y;
+    cube.position.z = this.prop.position.z;
 
     cube.onAfterRender = function(){
       cube.rotation.x += 1 / (1*i);
-      cube.rotation.y += 1 / (1*i);
-      cube.rotation.z += 1 / (1*i);
+      cube.rotation.y += 1 / (2*i);
+      cube.rotation.z += 1 / (3*i);
     };
+
     return cube;
   }
 }
@@ -60,8 +64,8 @@ presto.line = {
         let line = new THREE.Line( geometry, new THREE.MeshBasicMaterial( { color: presto.random.color() } ) );
 
         line.onAfterRender = function(){
-            // line.rotation.x += 1 / (20*i);
-            // line.rotation.y += 1 / (20*i);
+            line.rotation.x += 1 / (10*i);
+            line.rotation.y += 1 / (5*i);
             line.rotation.z += 1 / (1*i);
         };
         return line;
@@ -78,33 +82,35 @@ scene.fog = new THREE.Fog(0x000000, 50, 2000);
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 camera.position.z = 7;
 
-// 光源
-scene.add(new THREE.DirectionalLight(0xff0000, 2)); // 平行光源
-scene.add(new THREE.AmbientLight(0x00ffff)); // 環境光源
+// ライト
+scene.add(new THREE.DirectionalLight(0xff0000, 2));
+scene.add(new THREE.AmbientLight(0x00ffff));
 
-// グループを作成
+// Fog
 const group = new THREE.Group();
 scene.add(group);
 const geometry = new THREE.BoxBufferGeometry(3, 3, 3);
-const material = new THREE.MeshStandardMaterial();
+
 for (let i = 0; i < 3000; i++) {
-  const mesh = new THREE.Mesh(geometry, material);
+  const mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial( { color: presto.random.color() } ));
   mesh.position.x = (Math.random() - 0.5) * 1000;
   mesh.position.y = (Math.random() - 0.5) * 1000;
   mesh.position.z = (Math.random() - 0.5) * 1000;
   mesh.rotation.x = Math.random() * 2 * Math.PI;
   mesh.rotation.y = Math.random() * 2 * Math.PI;
   mesh.rotation.z = Math.random() * 2 * Math.PI;
-  // グループに格納する
   group.add(mesh);
 }
 
 
-for(i=0; i<=100; i++){
-  console.log(i);
+for(let i=1; i<=10; i++){
 	scene.add( presto.cube.create(i) );
-  scene.add( presto.line.create(i) );
+
+  for(let j=1; j<=30; j++){
+    scene.add( presto.line.create(i*j) );
+  }
 }
+
 
 
 var animate = function () {
