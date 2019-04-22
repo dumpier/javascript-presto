@@ -19,6 +19,99 @@ window.addEventListener('load', function(){
 });
 
 
+// ---------------------------------------------------------
+// Air plane
+// ---------------------------------------------------------
+var air = air || {
+    prop : [
+        { color: "orange", size: [0.1,0.2,1.6], position: [-2,0,0], rotation: [0,0,0], speed: ["rotation", 0.5, 0, 0],}, // プロペラ
+        { color: "red", size: [0.1,0.2, 0.6], position: [-3.6,0,0], rotation: [0,0,0], speed: ["rotation", 0.7, 0, 0],}, // プロペラ
+        { color: "#FF5733", size: [0.2,0.6,0.6], position: [-2.25,0,0], rotation: [10,0,0], speed: ["",0,0,0,],}, // BODY
+        { color: "#bbbbbb", size: [1,0.5,0.5], position: [-2.6,0,0], rotation: [10,0,0], speed: ["",0,0,0,],}, // BODY
+        { color: "orange", size: [1,0.2,0.2], position: [-3.1,0,0], rotation: [10,0,0], speed: ["",0,0,0,],}, // BODY
+        { color: "red", size: [0.6,2.6,0.1], position: [-2.8,0,0], rotation: [-10,0,0], speed: ["",0,0,0,],}, // 翼
+    ],
+
+    create : function(){ 
+        let airplane = new THREE.Group();
+        air.prop.forEach(config => {
+            airplane.add(air.base.cube.color(config.color)
+                    .size(config.size[0],config.size[1],config.size[2])
+                    .position(config.position[0],config.position[1],config.position[2],)
+                    .rotation(config.rotation[0],config.rotation[1],config.rotation[2],)
+                    .speed(config.speed[0],config.speed[1],config.speed[2],config.speed[3],)
+                    .create());    
+        });
+
+        return airplane;
+    }
+}
+
+// color
+air.random = {
+  color : function(){
+    let r = ('0' + Math.floor(Math.random() * 255).toString(16)).slice(-2);
+    let g = ('0' + Math.floor(Math.random() * 255).toString(16)).slice(-2);
+    let b = ('0' + Math.floor(Math.random() * 255).toString(16)).slice(-2);
+    return '#' + r + g + b;
+  }
+}
+air.base = {}
+
+// cube
+air.base.cube = {
+    prop : {
+        size : {x:1, y:1, z:1},
+        position : {x:0, y:0, z:0},
+        rotation : {x:0, y:0, z:0},
+        speed : { position : {x:0, y:0, z:0}, rotation : {x:0, y:0, z:0}, },
+    },
+    reset : function(){
+        this.prop = {
+            size : {x:1, y:1, z:1},
+            position : {x:0, y:0, z:0},
+            rotation : {x:0, y:0, z:0},
+            speed : { position : {x:0, y:0, z:0}, rotation : {x:0, y:0, z:0}, },
+        };
+    },
+
+    color : function(color) { this.prop.color = color; return this; },
+    size : function(x, y, z){ [this.prop.size.x,this.prop.size.y,this.prop.size.z] = [x, y, z]; return this; },
+    position : function(x, y, z){ [this.prop.position.x,this.prop.position.y,this.prop.position.z] = [x, y, z]; return this; },
+    rotation : function(x, y, z){ [this.prop.rotation.x,this.prop.rotation.y,this.prop.rotation.z] = [x, y, z]; return this; },
+    speed : function(type, x, y, z){ 
+        if(type=="rotation"){
+            [this.prop.speed.rotation.x,this.prop.speed.rotation.y,this.prop.speed.rotation.z] = [x, y, z];
+        }else{
+            [this.prop.speed.position.x,this.prop.speed.position.y,this.prop.speed.position.z] = [x, y, z];
+        }
+        return this;
+    },
+
+    create: function(){
+        let box = new THREE.BoxGeometry( this.prop.size.x, this.prop.size.y, this.prop.size.z );
+        let color = this.prop.color ? this.prop.color : air.random.color();
+        let material = new THREE.MeshBasicMaterial( { color: color });
+        let cube = new THREE.Mesh( box, material );
+
+        cube.position.set(this.prop.position.x, this.prop.position.y, this.prop.position.z);
+        cube.rotation.set(this.prop.rotation.x, this.prop.rotation.y, this.prop.rotation.z);
+
+        cube.speed = this.prop.speed;
+
+        cube.onAfterRender = function(){
+            cube.rotation.x += cube.speed.rotation.x;
+            cube.rotation.y += cube.speed.rotation.y;
+            cube.rotation.z += cube.speed.rotation.z;
+        };
+
+        this.reset();
+        return cube;
+    },
+}
+// ---------------------------------------------------------
+
+
 var presto = presto || {}
 
 presto.random = {
@@ -80,18 +173,21 @@ var scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x000000, 50, 2000);
 
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-camera.position.z = 7;
+camera.position.z = 5;
 
 // ライト
 scene.add(new THREE.DirectionalLight(0xff0000, 2));
 scene.add(new THREE.AmbientLight(0x00ffff));
 
+// 飛行機
+scene.add(new air.create());
+
 // Fog
 const group = new THREE.Group();
 scene.add(group);
-const geometry = new THREE.BoxBufferGeometry(3, 3, 3);
+const geometry = new THREE.BoxBufferGeometry(5, 5, 5);
 
-for (let i = 0; i < 3000; i++) {
+for (let i = 0; i < 2000; i++) {
   const mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial( { color: presto.random.color() } ));
   mesh.position.x = (Math.random() - 0.5) * 1000;
   mesh.position.y = (Math.random() - 0.5) * 1000;
