@@ -28,7 +28,7 @@ ul { list-style: none; margin: 0px; font-size:0px; }
 a:hover { opacity: 0.85; }
 
 div#game-wrapper { width:400px; height:800px; margin-top:20px; position:relative; background:#f9f9f9; margin-left: auto; margin-right: auto;
-        background-image: url("/res/images/bg/home/pipo-battlebg003.jpg");
+        background-image: url("https://dumpier.github.io/javascript-presto/res/images/bg/home/pipo-battlebg003.jpg");
         background-repeat: no-repeat;
         background-size:auto 100%;
         background-position:center top;
@@ -287,7 +287,7 @@ $(function(){
     <div id="game-header">
         <div style="float: left;"><div style="width: 50px; height:50px; border: solid 2px #fd7e14; border-radius: 5px; ">
   <div style="width:46px; height:46px;
-    background-image :url('/res/images/character/fase/face-all.jpg');
+    background-image :url('https://dumpier.github.io/javascript-presto/res/images/character/fase/face-all.jpg');
     background-repeat: no-repeat;
     background-size: 230px;
     background-position: -0px -0px;">
@@ -316,7 +316,7 @@ animate.png = {
     },
 
     show : async function(el){
-        el.css({"display":"block", "background": "url(/res/images/effect/opening.png) no-repeat top"});
+        el.css({"display":"block", "background": "url(https://dumpier.github.io/javascript-presto/res/images/effect/opening.png) no-repeat top"});
 //      await this.loop(el);
     },
 
@@ -420,7 +420,7 @@ var battle = battle || {
         battle.el.actor.effect(data.actor_id).css({"display":"block","background":"#007bff"});
         // TODO とりあえずランダムでエフェクトを選ぶ
         let effect_id = Math.floor( Math.random() * 5 ) + 1;
-        battle.el.actor.effect(data.actor_id).html(`<img width=100% height=100% src="/res/images/effect/${effect_id}.gif">`);
+        battle.el.actor.effect(data.actor_id).html(`<img width=100% height=100% src="https://dumpier.github.io/javascript-presto/res/images/effect/${effect_id}.gif">`);
 
         battle.el.actor.get(data.actor_id).effect("shake", {times:1, distance: 10, direction:"left"}, 400);
         this.statuses(data.actor_id, data);
@@ -527,7 +527,7 @@ var gauge = {
 /* ************** animation *************** */
 div#mask-opening {
     position: absolute; width:100%; height:100%; opacity: 1; z-index:1;
-    background: url('/res/images/effect/opening.png') no-repeat;background-size: 100% 3000px;
+    background: url('https://dumpier.github.io/javascript-presto/res/images/effect/opening.png') no-repeat;background-size: 100% 3000px;
     /* animation: opening 1.2s steps(10) forwards; */
 }
 @keyframes opening {
@@ -535,7 +535,7 @@ div#mask-opening {
 }
 
 div.battle-effect-1 {
-    background: url('/res/images/effect/opening.png') no-repeat;background-size: 160px 100%;
+    background: url('https://dumpier.github.io/javascript-presto/res/images/effect/opening.png') no-repeat;background-size: 160px 100%;
     animation: opening 1.2s steps(5) forwards;
 }
 @keyframes battle-effect-1 {
@@ -593,7 +593,7 @@ div#battle-round {
 
             <div style="float: left;"><div style="width: 50px; height:50px; border: solid 0px #fd7e14; border-radius: 5px; ">
   <div style="width:50px; height:50px;
-    background-image :url('/res/images/character/fase/face-all.jpg');
+    background-image :url('https://dumpier.github.io/javascript-presto/res/images/character/fase/face-all.jpg');
     background-repeat: no-repeat;
     background-size: 250px;
     background-position: -0px -0px;">
@@ -615,7 +615,7 @@ div#battle-round {
 
             <div style="float: left;"><div style="width: 50px; height:50px; border: solid 0px #fd7e14; border-radius: 5px; ">
   <div style="width:50px; height:50px;
-    background-image :url('/res/images/character/fase/face-all.jpg');
+    background-image :url('https://dumpier.github.io/javascript-presto/res/images/character/fase/face-all.jpg');
     background-repeat: no-repeat;
     background-size: 250px;
     background-position: -50px -0px;">
@@ -637,7 +637,7 @@ div#battle-round {
 
             <div style="float: left;"><div style="width: 50px; height:50px; border: solid 0px #fd7e14; border-radius: 5px; ">
   <div style="width:50px; height:50px;
-    background-image :url('/res/images/character/fase/face-all.jpg');
+    background-image :url('https://dumpier.github.io/javascript-presto/res/images/character/fase/face-all.jpg');
     background-repeat: no-repeat;
     background-size: 250px;
     background-position: -100px -0px;">
@@ -659,7 +659,7 @@ div#battle-round {
 
             <div style="float: left;"><div style="width: 50px; height:50px; border: solid 0px #fd7e14; border-radius: 5px; ">
   <div style="width:50px; height:50px;
-    background-image :url('/res/images/character/fase/face-all.jpg');
+    background-image :url('https://dumpier.github.io/javascript-presto/res/images/character/fase/face-all.jpg');
     background-repeat: no-repeat;
     background-size: 250px;
     background-position: -150px -0px;">
@@ -684,7 +684,7 @@ div#battle-round {
 
             <div style="float: right;"><div style="width: 50px; height:50px; border: solid 0px #fd7e14; border-radius: 5px; ">
   <div style="width:50px; height:50px;
-    background-image :url('/res/images/character/fase/face-all.jpg');
+    background-image :url('https://dumpier.github.io/javascript-presto/res/images/character/fase/face-all.jpg');
     background-repeat: no-repeat;
     background-size: 250px;
     background-position: -200px -0px;">
@@ -706,7 +706,7 @@ div#battle-round {
 
             <div style="float: right;"><div style="width: 50px; height:50px; border: solid 0px #fd7e14; border-radius: 5px; ">
   <div style="width:50px; height:50px;
-    background-image :url('/res/images/character/fase/face-all.jpg');
+    background-image :url('https://dumpier.github.io/javascript-presto/res/images/character/fase/face-all.jpg');
     background-repeat: no-repeat;
     background-size: 250px;
     background-position: -0px -50px;">
@@ -728,7 +728,7 @@ div#battle-round {
 
             <div style="float: right;"><div style="width: 50px; height:50px; border: solid 0px #fd7e14; border-radius: 5px; ">
   <div style="width:50px; height:50px;
-    background-image :url('/res/images/character/fase/face-all.jpg');
+    background-image :url('https://dumpier.github.io/javascript-presto/res/images/character/fase/face-all.jpg');
     background-repeat: no-repeat;
     background-size: 250px;
     background-position: -50px -50px;">
@@ -750,7 +750,7 @@ div#battle-round {
 
             <div style="float: right;"><div style="width: 50px; height:50px; border: solid 0px #fd7e14; border-radius: 5px; ">
   <div style="width:50px; height:50px;
-    background-image :url('/res/images/character/fase/face-all.jpg');
+    background-image :url('https://dumpier.github.io/javascript-presto/res/images/character/fase/face-all.jpg');
     background-repeat: no-repeat;
     background-size: 250px;
     background-position: -100px -50px;">
