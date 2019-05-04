@@ -1,0 +1,55 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JAVASCRIPT-PRESTO</title>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async="async"></script>
+<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+
+<link href="./res/css/loader.css" rel="stylesheet" type="text/css">
+<script src="./res/js/presto.js"></script>
+</head>
+<body style="margin: 10px;">
+
+<style>
+body {
+  background: #24aecd;
+}
+
+.monster {
+  border : solid 5px #fff;
+  width: 400px;
+  height: 300px;
+  margin: 2% auto;
+  background: url('http://app.presto.homestead.test/res/images/effect/opening.png') no-repeat;
+  background-size: 400px 3000px;
+  animation: play .6s steps(10);
+}
+
+@keyframes play {
+    100% { background-position: 0px -3000px; opacity:0; }
+}
+
+div.battle-effect {border : solid 5px #fff; margin-bottom:10px; width:120px; height:120px;
+    background: url('http://app.presto.homestead.test/res/images/effect/battle/320x240/pipo-btleffect041.png') left center;
+    background-size: 960px 120px ;
+    animation: battle-effect 1.2s steps(8) infinite;
+}
+@keyframes battle-effect { 100% { background-position: -960px 0px; opacity:1; } }
+
+div.battle-effect-1 {  }
+</style>
+<div class="monster"></div>
+
+<div class="battle-effect"></div>
+
+</body>
+</html>
