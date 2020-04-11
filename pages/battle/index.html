@@ -58,7 +58,7 @@ ul.game-block-list li a span.fa { padding:0px 10px; font-size:20px; }
 
 </style>
 
-    <script>
+<script>
 $(function(){
     $("body").on("click", "a.presto-get, a.presto-post", function(event){
         // リンクの直接遷移を無効化
@@ -200,7 +200,7 @@ presto.directive.forearch = {}
 presto.directive.bind = {}
 presto.directive.model = {}
 
-
+battle.play();
 </script>
 
 <style type="text/css">
@@ -787,7 +787,7 @@ div#battle-round {
 
 <div class="text-right" style="position:absolute; z-index: 2;width:100%;">
     <a href="./" class="btn btn-info" >RELOAD</a>
-    <a href="javascript:void(0);" class="btn btn-success" onclick="battle.play();">PLAY</a>
+    <!-- <a href="javascript:void(0);" class="btn btn-success" onclick="battle.play();">PLAY</a> -->
 </div>
 <div id="game-battle-log"></div>
 
