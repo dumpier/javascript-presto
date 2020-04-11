@@ -60,6 +60,8 @@ ul.game-block-list li a span.fa { padding:0px 10px; font-size:20px; }
 
 <script>
 $(function(){
+    battle.play();
+
     $("body").on("click", "a.presto-get, a.presto-post", function(event){
         // リンクの直接遷移を無効化
         event.preventDefault();
@@ -200,7 +202,6 @@ presto.directive.forearch = {}
 presto.directive.bind = {}
 presto.directive.model = {}
 
-battle.play();
 </script>
 
 <style type="text/css">
