@@ -302,13 +302,15 @@ var google = google || {
 		const label = ($el.closest('.quetion').index() + 1) + '-' + name;
 		const value = (['register_password', 'register_email', 'name_sei', 'name_mei', 'kana_sei', 'kana_mei',].includes(name)) ? 'secret' : $el.val();
 		const data = {'hitType': 'event','eventCategory':'regist-form-prod', 'eventAction':'input', 'eventLabel':label, 'eventValue':value};
-		console.log(data);		return ga('send', data);
+		console.log(data);
+		return ga('send', data);
 	},
 
 	render:(quetion_id)=>{
 		return false;
 		const data = {'hitType': 'event','eventCategory':'regist-form-prod', 'eventAction':'render', 'eventLabel':`quetion-${quetion_id}`, 'eventValue':quetion_id};
-		console.log(data);		return ga('send', data);
+		console.log(data);
+		return ga('send', data);
 	},
 }
 
@@ -332,11 +334,11 @@ var regist = regist || {
 			$('#progress-val').text(current);
 		}
 
-				setTimeout(()=>{
-						$(`#quetion-${prev}`).hide();
-						$(`#quetion-${current}`).show();
+		setTimeout(()=>{
+			$(`#quetion-${prev}`).hide();
+			$(`#quetion-${current}`).show();
 
-						if (current == 13) {
+			if (current == 13) {
 				$('#entry-action').show();
 			} else {
 				$('#entry-action').hide();
@@ -361,12 +363,12 @@ var regist = regist || {
 		return true;
 	},
 
-		keydown:(event)=>{ return ((event.which && event.which === 13) || (event.keyCode && event.keyCode === 13)) ? false : true; },
-		nextageButton:($el)=>{ return $el.closest('.quetion').find('.action').eq(0); },
-		enable:($el)=>{ $el.css({'pointer-events':'auto', 'background':'#FFC000',}); },
-		disable:($el)=>{ $el.css({'pointer-events':'none', 'background':'#CCC',}); },
+	keydown:(event)=>{ return ((event.which && event.which === 13) || (event.keyCode && event.keyCode === 13)) ? false : true; },
+	nextageButton:($el)=>{ return $el.closest('.quetion').find('.action').eq(0); },
+	enable:($el)=>{ $el.css({'pointer-events':'auto', 'background':'#FFC000',}); },
+	disable:($el)=>{ $el.css({'pointer-events':'none', 'background':'#CCC',}); },
 
-		folding:(event, $el)=>{
+	folding:(event, $el)=>{
 		const $items = $el.closest('.folding').children('.items');
 		if ($items.hasClass('hide')) {
 			$el.children('.expandable').text('ー');
@@ -378,7 +380,7 @@ var regist = regist || {
 		}
 	},
 
-		scroll:(event, $el)=>{
+	scroll:(event, $el)=>{
 		const scroll_id = $el.closest('.folding').data('scroll-id');
 
 		if (scroll_id) {
@@ -398,10 +400,10 @@ var regist = regist || {
 		$el.closest('li').children('label.activiable').addClass('checked');
 	},
 
-		nextage:(e, $el)=>{
-				const $nextage = regist.nextageButton($el);
+	nextage:(e, $el)=>{
+		const $nextage = regist.nextageButton($el);
 
-				let $inputs = "";
+		let $inputs = "";
 
 		if (['checkbox', 'radio'].includes($el.prop('type')) ) {
 			$inputs = $el.closest('.quetion').find('.input.required:checked');
@@ -429,7 +431,7 @@ var regist = regist || {
 		const current = $el.closest('.quetion').index() + 1;
 		const next = current + 1;
 
-				if ($el.hasClass('action')) {
+		if ($el.hasClass('action')) {
 			regist.checked(event, $el);
 		}
 
